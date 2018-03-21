@@ -1,8 +1,5 @@
-To build project:
-mvn clean package
+To build the project you have to have Maven installed.
 
-To run tests:
-mvn clean test
-
-To run project:
-java -jar ./target\users-0.0.1-SNAPSHOT.jar
+Use 'mvn clean package' build project.
+Use 'mvn clean test' run tests.
+Use 'java -jar ./target\users-0.0.1-SNAPSHOT.jar' to run.
