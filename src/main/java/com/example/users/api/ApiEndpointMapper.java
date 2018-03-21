@@ -17,7 +17,7 @@ public class ApiEndpointMapper {
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public User create(User user) {
+	public User createUser(User user) {
 		return userService.save(user);
 	}
 
@@ -36,12 +36,12 @@ public class ApiEndpointMapper {
 
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
-	public User update(User user) {
+	public User updateUser(User user) {
 		return userService.update(user);
 	}
 
 	@DELETE
-	public Response delete(User user) {
+	public Response deleteUser(User user) {
 		Response.ResponseBuilder response;
 		try {
 			userService.delete(user);
