@@ -10,52 +10,45 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Component
-@Path("/")
+@Path("/users")
 public class ApiEndpointMapper {
 	@Autowired
 	private UserService userService;
 
-	@GET
-	@Path("/")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response ping() {
-		return Response.ok("Users Service is running").build();
-	}
-
 	@POST
-	@Path("/users")
-	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public User create(User user) {
 		return userService.save(user);
 	}
 
 	@GET
-	@Path("/users")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Iterable<User> getAllUsers() {
-		return userService.getAll();
+		return userService.retrieveAll();
 	}
 
 	@GET
-	@Path("/users/{id}")
+	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public User getUserById(@PathParam("id") long id) {
-		return userService.getById(id);
-//		return new User(123, "Ivan", "Ivanov");
+		return userService.retrieveById(id);
 	}
 
 	@PUT
-	@Path("/users/{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response update(@PathParam("id") long id) {
-		return Response.noContent().build();
+	@Produces(MediaType.APPLICATION_JSON)
+	public User update(User user) {
+		return userService.update(user);
 	}
 
 	@DELETE
-	@Path("/users/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response delete(@PathParam("id") long id) {
-		return Response.noContent().build();
+	public Response delete(User user) {
+		Response.ResponseBuilder response;
+		try {
+			userService.delete(user);
+			response = Response.ok();
+		} catch (Exception e) {
+			response = Response.notModified(e.getMessage());
+		}
+		return response.build();
 	}
 }

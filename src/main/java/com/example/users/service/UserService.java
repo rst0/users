@@ -4,24 +4,29 @@ import com.example.users.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService {
-    @Autowired
-    private CrudRepository<User, Long> repository;
+	@Autowired
+	private CrudRepository<User, Long> repository;
 
-    @Transactional
-    public Iterable<User> getAll() {
-        return repository.findAll();
-    }
+	public Iterable<User> retrieveAll() {
+		return repository.findAll();
+	}
 
-    @Transactional
-    public User getById(long id) {
-        return repository.findOne(id);
-    }
+	public User retrieveById(long id) {
+		return repository.findOne(id);
+	}
 
-    public User save(User user) {
-        return repository.save(user);
-    }
+	public User save(User user) {
+		return repository.save(user);
+	}
+
+	public User update(User user) {
+		return repository.save(user);
+	}
+
+	public void delete(User user) {
+		repository.delete(user);
+	}
 }
